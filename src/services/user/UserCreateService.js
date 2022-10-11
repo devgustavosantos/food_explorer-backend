@@ -24,8 +24,6 @@ class UserCreateService {
       );
     }
 
-    console.log({ email, admin: process.env.ADMIN_EMAIL });
-
     const requiredAttributesForValidEmail = email
       .split("@")[1]
       .split("")
