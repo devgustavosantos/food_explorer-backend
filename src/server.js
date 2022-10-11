@@ -1,6 +1,12 @@
+require("express-async-errors");
 const express = require("express");
+const routes = require("./routes");
 
 const app = express();
+
+app.use(json());
+
+app.use(routes);
 
 const PORT = 3333;
 
