@@ -20,7 +20,7 @@ describe("UserCreateService", () => {
 
     const result = await userCreateService.execute(user);
 
-    expect(result).toEqual("Successfully");
+    expect(result).toHaveProperty("id");
   });
 
   it("must register a admin", async () => {
@@ -32,7 +32,7 @@ describe("UserCreateService", () => {
 
     const result = await userCreateService.execute(admin);
 
-    expect(result).toEqual("Successfully");
+    expect(result).toHaveProperty("id");
   });
 
   it("should return a missing data error", async () => {
