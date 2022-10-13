@@ -39,7 +39,7 @@ class UserCreateService {
 
     const passwordHashed = await hash(password, 8);
 
-    const itIsAnAdminEmail = email.includes(process.env.ADMIN_EMAIL);
+    const itIsAnAdminEmail = email.includes(process.env.ADMIN_EMAIL || "@admin.com");
     const is_admin = itIsAnAdminEmail ? true : false;
 
     const userRegistered = await this.userRepository.create({

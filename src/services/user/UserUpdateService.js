@@ -26,8 +26,6 @@ class UserUpdateService {
     if (email) {
       const isEmailInUse = await this.userRepository.findByEmail(email);
 
-      console.log({ isEmailInUse, id });
-
       if (isEmailInUse && isEmailInUse.id !== id) {
         throw new AppError("Este e-mail já esta em uso.");
       }

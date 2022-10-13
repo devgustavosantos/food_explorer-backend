@@ -26,7 +26,7 @@ describe("UserCreateService", () => {
   it("must register a admin", async () => {
     const admin = {
       name: "test",
-      email: `test${process.env.ADMIN_EMAIL}`,
+      email: `test${process.env.ADMIN_EMAIL || "@admin.com"}`,
       password: "123",
     };
 
