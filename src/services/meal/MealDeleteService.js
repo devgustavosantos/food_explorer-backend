@@ -1,22 +1,9 @@
-const AppError = require("../../utils/AppError");
-
 class MealDeleteService {
-  constructor(userRepository, mealRepository) {
-    this.userRepository = userRepository;
+  constructor(mealRepository) {
     this.mealRepository = mealRepository;
   }
 
-  async execute({ user_id, meal_id }) {
-    const userInfos = await this.userRepository.findById(user_id);
-
-    if (!userInfos) {
-      throw new AppError("Usuário não autorizado!");
-    }
-
-    if (!userInfos.is_admin) {
-      throw new AppError("Usuário não autorizado!");
-    }
-
+  async execute(meal_id) {
     await this.mealRepository.delete(meal_id);
   }
 }

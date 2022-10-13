@@ -1,23 +1,14 @@
 const AppError = require("../../utils/AppError");
 
 class MealCreateService {
-  constructor(userRepository, mealRepository) {
-    this.userRepository = userRepository;
+  constructor(mealRepository) {
     this.mealRepository = mealRepository;
   }
 
-  async execute({ user_id, title, description, price }) {
-    if (!user_id || !title || !description || !price) {
+  async execute({ title, description, price }) {
+    if (!title || !description || !price) {
       throw new AppError(
         "Faltam dados necessário para cadastrar um novo prato."
-      );
-    }
-
-    const usersInfos = await this.userRepository.findById(user_id);
-
-    if (!usersInfos.is_admin) {
-      throw new AppError(
-        "Este usuário não tem permissão para cadastrar um novo prato."
       );
     }
 

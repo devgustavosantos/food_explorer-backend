@@ -1,5 +1,3 @@
-const UserRepository = require("../repositories/user/UserRepository");
-
 const IngredientsRepository = require("../repositories/ingredients/IngredientsRepository");
 
 const MealRepository = require("../repositories/meal/MealRepository");
@@ -16,14 +14,9 @@ const Meal_IngredientUpdateService = require("../services/meal_ingredient/Meal_I
 class MealsControllers {
   async create(request, response) {
     const { title, description, price, ingredients } = request.body;
-    const user_id = Number(request.query.user_id);
 
-    const userRepository = new UserRepository();
     const mealRepository = new MealRepository();
-    const mealCreateService = new MealCreateService(
-      userRepository,
-      mealRepository
-    );
+    const mealCreateService = new MealCreateService(mealRepository);
 
     const meal_IngredientRepository = new Meal_IngredientRepository();
     const meal_IngredientCreateService = new Meal_IngredientCreateService(
@@ -31,7 +24,6 @@ class MealsControllers {
     );
 
     const mealId = await mealCreateService.execute({
-      user_id,
       title,
       description,
       price,
@@ -70,14 +62,9 @@ class MealsControllers {
   async update(request, response) {
     const { title, description, price, ingredients } = request.body;
     const { id: meal_id } = request.params;
-    const user_id = Number(request.query.user_id);
 
-    const userRepository = new UserRepository();
     const mealRepository = new MealRepository();
-    const mealUpdateService = new MealUpdateService(
-      userRepository,
-      mealRepository
-    );
+    const mealUpdateService = new MealUpdateService(mealRepository);
 
     const meal_IngredientRepository = new Meal_IngredientRepository();
     const meal_IngredientUpdateService = new Meal_IngredientUpdateService(
@@ -85,7 +72,6 @@ class MealsControllers {
     );
 
     await mealUpdateService.execute({
-      user_id,
       meal_id,
       title,
       description,
@@ -100,16 +86,11 @@ class MealsControllers {
 
   async delete(request, response) {
     const { id: meal_id } = request.params;
-    const user_id = Number(request.query.user_id);
 
     const mealRepository = new MealRepository();
-    const userRepository = new UserRepository();
-    const mealDeleteService = new MealDeleteService(
-      userRepository,
-      mealRepository
-    );
+    const mealDeleteService = new MealDeleteService(mealRepository);
 
-    await mealDeleteService.execute({ user_id, meal_id });
+    await mealDeleteService.execute(meal_id);
 
     return response.status(201).json();
   }
