@@ -23,6 +23,18 @@ class MealRepository {
     return meals;
   }
 
+  async findById(id) {
+    const mealInfos = await knex("meals").where({ id }).first();
+
+    return mealInfos;
+  }
+
+  async findByTitle(title) {
+    const mealInfos = await knex("meals").where({ title }).first();
+
+    return mealInfos;
+  }
+
   async update({ id, title, description, price, updated_at }) {
     await knex("meals")
       .update({
@@ -36,16 +48,8 @@ class MealRepository {
     return;
   }
 
-  async findById(id) {
-    const mealInfos = await knex("meals").where({ id }).first();
-
-    return mealInfos;
-  }
-
-  async findByTitle(title) {
-    const mealInfos = await knex("meals").where({ title }).first();
-
-    return mealInfos;
+  async delete(id) {
+    await knex("meals").delete().where({ id });
   }
 }
 

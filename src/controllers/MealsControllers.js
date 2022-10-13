@@ -7,6 +7,7 @@ const MealCreateService = require("../services/meal/MealCreateService");
 const MealUpdateService = require("../services/meal/MealUpdateService");
 const MealIndexService = require("../services/meal/MealIndexService");
 const MealShowService = require("../services/meal/MealShowService");
+const MealDeleteService = require("../services/meal/MealDeleteService");
 
 const Meal_IngredientRepository = require("../repositories/meal_ingredient/Meal_IngredientRepository");
 const Meal_IngredientCreateService = require("../services/meal_ingredient/Meal_IngredientCreateService");
@@ -93,6 +94,22 @@ class MealsControllers {
     });
 
     await meal_IngredientUpdateService.execute({ meal_id, ingredients });
+
+    return response.status(201).json();
+  }
+
+  async delete(request, response) {
+    const { id: meal_id } = request.params;
+    const user_id = Number(request.query.user_id);
+
+    const mealRepository = new MealRepository();
+    const userRepository = new UserRepository();
+    const mealDeleteService = new MealDeleteService(
+      userRepository,
+      mealRepository
+    );
+
+    await mealDeleteService.execute({ user_id, meal_id });
 
     return response.status(201).json();
   }

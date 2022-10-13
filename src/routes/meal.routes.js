@@ -8,6 +8,7 @@ routes
   .post("/", mealsControllers.create)
   .get("/", mealsControllers.index)
   .get("/:id", mealsControllers.show)
-  .put("/:id", mealsControllers.update);
+  .put("/:id", mealsControllers.update)
+  .delete("/:id", mealsControllers.delete);
 
 module.exports = routes;
