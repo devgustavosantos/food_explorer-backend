@@ -1,9 +1,12 @@
 const UserRepository = require("../repositories/user/UserRepository");
 
+const IngredientsRepository = require("../repositories/ingredients/IngredientsRepository");
+
 const MealRepository = require("../repositories/meal/MealRepository");
 const MealCreateService = require("../services/meal/MealCreateService");
 const MealUpdateService = require("../services/meal/MealUpdateService");
 const MealIndexService = require("../services/meal/MealIndexService");
+const MealShowService = require("../services/meal/MealShowService");
 
 const Meal_IngredientRepository = require("../repositories/meal_ingredient/Meal_IngredientRepository");
 const Meal_IngredientCreateService = require("../services/meal_ingredient/Meal_IngredientCreateService");
@@ -45,6 +48,21 @@ class MealsControllers {
     const mealIndexService = new MealIndexService(mealRepository);
 
     const result = await mealIndexService.execute({ title });
+    return response.status(201).json(result);
+  }
+
+  async show(request, response) {
+    const { id } = request.params;
+
+    const mealRepository = new MealRepository();
+    const ingredientsRepository = new IngredientsRepository();
+    const mealShowService = new MealShowService(
+      mealRepository,
+      ingredientsRepository
+    );
+
+    const result = await mealShowService.execute(id);
+
     return response.status(201).json(result);
   }
 

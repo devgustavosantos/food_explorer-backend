@@ -7,6 +7,7 @@ const mealsControllers = new MealsControllers();
 routes
   .post("/", mealsControllers.create)
   .get("/", mealsControllers.index)
+  .get("/:id", mealsControllers.show)
   .put("/:id", mealsControllers.update);
 
 module.exports = routes;
