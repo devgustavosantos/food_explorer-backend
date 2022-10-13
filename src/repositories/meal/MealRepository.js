@@ -11,6 +11,18 @@ class MealRepository {
     return registeredMeal[0];
   }
 
+  async returnAll() {
+    const meals = await knex("meals");
+
+    return meals;
+  }
+
+  async findBySimilarTitle(title) {
+    const meals = await knex("meals").whereLike("title", `%${title}%`);
+
+    return meals;
+  }
+
   async update({ id, title, description, price, updated_at }) {
     await knex("meals")
       .update({
