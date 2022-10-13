@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(routes);
 
-const PORT = 3333;
+const PORT = process.env.PORT || 3000;
 
 app.use((error, request, response, next) => {
   if (error instanceof AppError) {

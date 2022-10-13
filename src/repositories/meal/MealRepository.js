@@ -11,6 +11,25 @@ class MealRepository {
     return registeredMeal[0];
   }
 
+  async update({ id, title, description, price, updated_at }) {
+    await knex("meals")
+      .update({
+        title,
+        description,
+        price,
+        updated_at,
+      })
+      .where({ id });
+
+    return;
+  }
+
+  async findById(id) {
+    const mealInfos = await knex("meals").where({ id }).first();
+
+    return mealInfos;
+  }
+
   async findByTitle(title) {
     const mealInfos = await knex("meals").where({ title }).first();
 

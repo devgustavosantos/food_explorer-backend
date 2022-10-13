@@ -29,6 +29,10 @@ class MealCreateService {
       throw new AppError("Este título já está em uso.");
     }
 
+    if (isNaN(price)) {
+      throw new AppError("O preço é inválido.");
+    }
+
     const mealId = await this.mealRepository.create({
       title,
       description,

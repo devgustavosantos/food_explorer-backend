@@ -15,6 +15,12 @@ class MealRepositoryInMemory {
     return meal;
   }
 
+  async findById(id) {
+    const mealInfos = this.meals.find(meal => meal.id === id);
+
+    return mealInfos;
+  }
+
   async findByTitle(title) {
     const mealInfos = this.meals.find(meal => meal.title === title);
 
