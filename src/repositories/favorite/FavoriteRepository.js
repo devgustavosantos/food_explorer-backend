@@ -10,12 +10,22 @@ class FavoriteRepository {
     return favoriteCreated;
   }
 
+  async findById(id) {
+    const favorite = await knex("favorites").where({ id }).first();
+
+    return favorite;
+  }
+
   async findByUserAndMeal({ user_id, meal_id }) {
     const favoriteInfos = await knex("favorites")
       .where({ user_id, meal_id })
       .first();
 
     return favoriteInfos;
+  }
+
+  async delete(id) {
+    await knex("favorites").delete().where({ id });
   }
 }
 
