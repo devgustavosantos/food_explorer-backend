@@ -1,6 +1,6 @@
 const MealRepository = require("../repositories/meal/MealRepository");
 const OrderRepository = require("../repositories/order/OrderRepository");
-const OrderMealRepository = require("../repositories/order_meal/Order_MealRepository");
+const OrderMealRepository = require("../repositories/order_meal/OrderMealRepository");
 
 const OrderCreateService = require("../services/order/OrderCreateService");
 const OrderMealCreateService = require("../services/order_meal/OrderMealCreateService");

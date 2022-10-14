@@ -8,8 +8,8 @@ const MealShowService = require("../services/meal/MealShowService");
 const MealDeleteService = require("../services/meal/MealDeleteService");
 
 const Meal_IngredientRepository = require("../repositories/meal_ingredient/Meal_IngredientRepository");
-const Meal_IngredientCreateService = require("../services/meal_ingredient/Meal_IngredientCreateService");
-const Meal_IngredientUpdateService = require("../services/meal_ingredient/Meal_IngredientUpdateService");
+const MealIngredientCreateService = require("../services/meal_ingredient/MealIngredientCreateService");
+const MealIngredientUpdateService = require("../services/meal_ingredient/MealIngredientUpdateService");
 
 class MealsControllers {
   async create(request, response) {
@@ -19,7 +19,7 @@ class MealsControllers {
     const mealCreateService = new MealCreateService(mealRepository);
 
     const meal_IngredientRepository = new Meal_IngredientRepository();
-    const meal_IngredientCreateService = new Meal_IngredientCreateService(
+    const mealIngredientCreateService = new MealIngredientCreateService(
       meal_IngredientRepository
     );
 
@@ -29,7 +29,7 @@ class MealsControllers {
       price,
     });
 
-    await meal_IngredientCreateService.execute({ ingredients, mealId });
+    await mealIngredientCreateService.execute({ ingredients, mealId });
 
     return response.status(201).json();
   }
@@ -67,7 +67,7 @@ class MealsControllers {
     const mealUpdateService = new MealUpdateService(mealRepository);
 
     const meal_IngredientRepository = new Meal_IngredientRepository();
-    const meal_IngredientUpdateService = new Meal_IngredientUpdateService(
+    const mealIngredientUpdateService = new MealIngredientUpdateService(
       meal_IngredientRepository
     );
 
@@ -79,7 +79,7 @@ class MealsControllers {
       ingredients,
     });
 
-    await meal_IngredientUpdateService.execute({ meal_id, ingredients });
+    await mealIngredientUpdateService.execute({ meal_id, ingredients });
 
     return response.status(201).json();
   }
