@@ -29,6 +29,12 @@ class MealRepository {
     return mealInfos;
   }
 
+  async findManyByIds(ids) {
+    const mealInfos = await knex("meals").whereIn("id", ids);
+
+    return mealInfos;
+  }
+
   async findByTitle(title) {
     const mealInfos = await knex("meals").where({ title }).first();
 
