@@ -3,6 +3,8 @@ const OrderRepository = require("../repositories/order/OrderRepository");
 const OrderMealRepository = require("../repositories/order_meal/OrderMealRepository");
 
 const OrderCreateService = require("../services/order/OrderCreateService");
+const OrderUpdateService = require("../services/order/OrderUpdateService");
+const OrderSearchService = require("../services/order/OrderSearchService");
 const OrderMealCreateService = require("../services/order_meal/OrderMealCreateService");
 
 const MealIndexByIdService = require("../services/meal/MealIndexByIdService");
@@ -37,6 +39,20 @@ class OrdersControllers {
     await orderMealCreateService.execute({ user_id, meals: foundMeals });
 
     return response.json();
+  }
+
+  async update(request, response) {
+    const { order_id, status } = request.body;
+
+    const orderRepository = new OrderRepository();
+    const orderUpdateService = new OrderUpdateService(orderRepository);
+    const orderSearchService = new OrderSearchService(orderRepository);
+
+    await orderSearchService.execute(order_id);
+
+    await orderUpdateService.execute({ order_id, status });
+
+    return response.json({});
   }
 }
 
