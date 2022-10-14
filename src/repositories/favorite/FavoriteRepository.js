@@ -10,6 +10,21 @@ class FavoriteRepository {
     return favoriteCreated;
   }
 
+  async index(user_id) {
+    const favoritesMeals = await knex("meals")
+      .select([
+        "meals.id",
+        "meals.title",
+        "meals.description",
+        "meals.price",
+        "meals.image",
+      ])
+      .innerJoin("favorites", "favorites.meal_id", "meals.id")
+      .where("favorites.user_id", user_id);
+
+    return favoritesMeals;
+  }
+
   async findById(id) {
     const favorite = await knex("favorites").where({ id }).first();
 

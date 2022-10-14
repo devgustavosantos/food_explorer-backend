@@ -11,6 +11,7 @@ routes
     ensuresThatTheMealIsRegistered,
     favoritesControllers.create
   )
+  .get("/", favoritesControllers.index)
   .delete("/:favorite_id", favoritesControllers.delete);
 
 module.exports = routes;
