@@ -1,4 +1,4 @@
-const IngredientsRepository = require("../repositories/ingredients/IngredientsRepository");
+const IngredientsRepository = require("../repositories/ingredients/IngredientRepository");
 
 const MealRepository = require("../repositories/meal/MealRepository");
 const MealCreateService = require("../services/meal/MealCreateService");
@@ -45,7 +45,7 @@ class MealsControllers {
   }
 
   async show(request, response) {
-    const { id } = request.params;
+    const { meal_id } = request.params;
 
     const mealRepository = new MealRepository();
     const ingredientsRepository = new IngredientsRepository();
@@ -54,14 +54,14 @@ class MealsControllers {
       ingredientsRepository
     );
 
-    const result = await mealShowService.execute(id);
+    const result = await mealShowService.execute(meal_id);
 
     return response.status(201).json(result);
   }
 
   async update(request, response) {
     const { title, description, price, ingredients } = request.body;
-    const { id: meal_id } = request.params;
+    const { meal_id } = request.params;
 
     const mealRepository = new MealRepository();
     const mealUpdateService = new MealUpdateService(mealRepository);
@@ -85,7 +85,7 @@ class MealsControllers {
   }
 
   async delete(request, response) {
-    const { id: meal_id } = request.params;
+    const { meal_id } = request.params;
 
     const mealRepository = new MealRepository();
     const mealDeleteService = new MealDeleteService(mealRepository);

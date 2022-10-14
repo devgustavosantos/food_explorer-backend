@@ -5,6 +5,12 @@ class IngredientsRepository {
     await knex("ingredients").insert({ name });
   }
 
+  async index() {
+    const ingredients = await knex("ingredients").select();
+
+    return ingredients;
+  }
+
   async showIngredientsOfAMeal(meal_id) {
     const ingredients = await knex("ingredients")
       .select(["ingredients.id", "ingredients.name", "ingredients.image"])
@@ -19,7 +25,7 @@ class IngredientsRepository {
   }
 
   async findByName(name) {
-    const ingredient = await knex("ingredients").select().where({ name });
+    const ingredient = await knex("ingredients").where({ name }).first();
 
     return ingredient;
   }

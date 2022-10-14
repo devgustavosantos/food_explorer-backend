@@ -4,6 +4,8 @@ const ensureThatIsAdmin = require("../middlewares/ensureThatIsAdmin");
 const routes = Router();
 const ingredientsControllers = new IngredientsControllers();
 
-routes.post("/", ensureThatIsAdmin, ingredientsControllers.create);
+routes
+  .post("/", ensureThatIsAdmin, ingredientsControllers.create)
+  .get("/", ingredientsControllers.index);
 
 module.exports = routes;

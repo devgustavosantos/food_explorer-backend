@@ -1,21 +1,26 @@
-const UserRepository = require("../repositories/user/UserRepository");
-const IngredientsRepository = require("../repositories/ingredients/IngredientsRepository");
+const IngredientsRepository = require("../repositories/ingredients/IngredientRepository");
 const IngredientCreateService = require("../services/ingredient/IngredientCreateService");
 
 class IngredientsControllers {
   async create(request, response) {
     const { name } = request.body;
-    const user_id = Number(request.query.user_id);
 
-    const userRepository = new UserRepository();
     const ingredientsRepository = new IngredientsRepository();
     const ingredientCreateService = new IngredientCreateService(
-      userRepository,
       ingredientsRepository
     );
 
-    await ingredientCreateService.execute({ user_id, name });
+    await ingredientCreateService.execute({ name });
+
     return response.json();
+  }
+
+  async index(request, response) {
+    const ingredientsRepository = new IngredientsRepository();
+
+    const result = await ingredientsRepository.index();
+
+    return response.json(result);
   }
 }
 
