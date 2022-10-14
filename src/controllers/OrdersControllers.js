@@ -5,6 +5,8 @@ const OrderMealRepository = require("../repositories/order_meal/OrderMealReposit
 const OrderCreateService = require("../services/order/OrderCreateService");
 const OrderMealCreateService = require("../services/order_meal/OrderMealCreateService");
 
+const MealIndexByIdService = require("../services/meal/MealIndexByIdService");
+
 class OrdersControllers {
   async create(request, response) {
     const user_id = Number(request.query.user_id);
@@ -12,19 +14,27 @@ class OrdersControllers {
 
     const mealRepository = new MealRepository();
     const orderRepository = new OrderRepository();
+    const orderMealRepository = new OrderMealRepository();
+
     const orderCreateService = new OrderCreateService(
       orderRepository,
       mealRepository
     );
 
-    const orderMealRepository = new OrderMealRepository();
     const orderMealCreateService = new OrderMealCreateService(
       orderMealRepository
     );
 
-    const orderId = await orderCreateService.execute({ user_id, meals_ids });
+    const mealIndexByIdService = new MealIndexByIdService(mealRepository);
 
-    await orderMealCreateService.execute({ meals_ids, orderId });
+    const foundMeals = await mealIndexByIdService.execute(meals_ids);
+
+    const orderId = await orderCreateService.execute({
+      user_id,
+      meals: foundMeals,
+    });
+
+    await orderMealCreateService.execute({ user_id, meals: foundMeals });
 
     return response.json();
   }

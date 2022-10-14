@@ -1,12 +1,11 @@
+const AppError = require("../../utils/AppError");
+
 class OrderCreateService {
-  constructor(orderRepository, mealRepository) {
+  constructor(orderRepository) {
     this.orderRepository = orderRepository;
-    this.mealRepository = mealRepository;
   }
 
-  async execute({ user_id, meals_ids }) {
-    const meals = await this.mealRepository.findManyByIds(meals_ids);
-
+  async execute({ user_id, meals }) {
     const prices = meals.map(meal => parseFloat(meal.price));
 
     const orderPrice = prices

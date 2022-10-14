@@ -3,7 +3,7 @@ const IngredientsRepository = require("../repositories/ingredients/IngredientRep
 const MealRepository = require("../repositories/meal/MealRepository");
 const MealCreateService = require("../services/meal/MealCreateService");
 const MealUpdateService = require("../services/meal/MealUpdateService");
-const MealIndexService = require("../services/meal/MealIndexService");
+const MealIndexByTitleService = require("../services/meal/MealIndexByTitleService");
 const MealShowService = require("../services/meal/MealShowService");
 const MealDeleteService = require("../services/meal/MealDeleteService");
 
@@ -38,9 +38,9 @@ class MealsControllers {
     const { title } = request.query;
 
     const mealRepository = new MealRepository();
-    const mealIndexService = new MealIndexService(mealRepository);
+    const mealIndexByTitleService = new MealIndexByTitleService(mealRepository);
 
-    const result = await mealIndexService.execute({ title });
+    const result = await mealIndexByTitleService.execute({ title });
     return response.status(201).json(result);
   }
 

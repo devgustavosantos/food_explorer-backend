@@ -1,4 +1,4 @@
-class MealIndexService {
+class MealIndexByTitleService {
   constructor(mealRepository) {
     this.mealRepository = mealRepository;
   }
@@ -16,4 +16,4 @@ class MealIndexService {
   }
 }
 
-module.exports = MealIndexService;
+module.exports = MealIndexByTitleService;

@@ -22,6 +22,7 @@ class MealRepositoryInMemory {
   }
 
   async findByTitle(title) {
+    console.log("passou aqui");
     const mealInfos = this.meals.find(meal => meal.title === title);
 
     return mealInfos;
