@@ -52,9 +52,9 @@ class OrdersControllers {
     const orderRepository = new OrderRepository();
     const orderShowService = new OrderShowService(orderRepository);
 
-    const orderInfos = await orderShowService.execute(order_id);
+    const orderWithMeals = await orderShowService.execute(order_id);
 
-    return response.json({});
+    return response.json(orderWithMeals);
   }
 
   async update(request, response) {

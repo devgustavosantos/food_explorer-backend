@@ -15,7 +15,13 @@ class OrderRepository {
 
   async findMealsOfAnOrder(order_id) {
     const meals = await knex("meals")
-      .select(["meals.id", "meals.title", "meals.price", "meals.image"])
+      .select([
+        "meals.id",
+        "meals.title",
+        "meals.price",
+        "meals.image",
+        "orders_meals.meal_amount",
+      ])
       .innerJoin("orders_meals", "orders_meals.meal_id", "meals.id")
       .where("orders_meals.order_id", order_id);
 

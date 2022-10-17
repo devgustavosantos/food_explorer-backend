@@ -10,9 +10,12 @@ class OrderShowService {
       order_id
     );
 
-    console.log({ order, mealsOfThisOrder });
+    const orderWithMeals = {
+      ...order,
+      meals: [...mealsOfThisOrder],
+    };
 
-    return order;
+    return orderWithMeals;
   }
 }
 
