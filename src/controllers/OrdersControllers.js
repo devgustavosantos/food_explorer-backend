@@ -52,6 +52,13 @@ class OrdersControllers {
 
     await orderUpdateService.execute({ order_id, status });
 
+    return response.json();
+  }
+
+  async show(request, response) {
+    const { order_id } = request.params;
+    const user_id = Number(request.query.user_id);
+
     return response.json({});
   }
 }
