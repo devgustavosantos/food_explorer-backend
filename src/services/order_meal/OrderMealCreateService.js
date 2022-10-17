@@ -3,11 +3,12 @@ class OrderMealCreateService {
     this.orderMealRepository = orderMealRepository;
   }
 
-  async execute({ meals, orderId }) {
-    const orderWithMeals = meals.map(meal => {
+  async execute({ orderId, meals_sent }) {
+    const orderWithMeals = meals_sent.map(meal => {
       return {
         order_id: orderId,
-        meal_id: meal.id,
+        meal_id: meal.meal_id,
+        meal_amount: meal.amount,
       };
     });
 

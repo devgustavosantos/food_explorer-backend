@@ -5,16 +5,18 @@ class MealIndexByIdService {
     this.mealRepository = mealRepository;
   }
 
-  async execute(ids) {
-    const meals = await this.mealRepository.findManyByIds(ids);
+  async execute(meals) {
+    const onlyIds = meals.map(order => order.meal_id);
 
-    const noMealFound = meals.length === 0;
+    const foundMeals = await this.mealRepository.findManyByIds(onlyIds);
+
+    const noMealFound = foundMeals.length === 0;
 
     if (noMealFound) {
       throw new AppError("Nenhum prato informado foi encontrado.");
     }
 
-    return meals;
+    return foundMeals;
   }
 }
 
