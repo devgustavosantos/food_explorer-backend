@@ -5,7 +5,7 @@ const FavoriteDeleteService = require("../services/favorite/FavoriteDeleteServic
 
 class FavoritesControllers {
   async create(request, response) {
-    const user_id = Number(request.query.user_id);
+    const user_id = request.user.id;
     const { meal_id } = request.params;
 
     const favoriteRepository = new FavoriteRepository();
@@ -17,7 +17,7 @@ class FavoritesControllers {
   }
 
   async index(request, response) {
-    const user_id = Number(request.query.user_id);
+    const user_id = request.user.id;
 
     const favoriteRepository = new FavoriteRepository();
     const favoriteIndexService = new FavoriteIndexService(favoriteRepository);
@@ -28,7 +28,7 @@ class FavoritesControllers {
   }
 
   async delete(request, response) {
-    const user_id = Number(request.query.user_id);
+    const user_id = request.user.id;
     const { favorite_id } = request.params;
 
     const favoriteRepository = new FavoriteRepository();

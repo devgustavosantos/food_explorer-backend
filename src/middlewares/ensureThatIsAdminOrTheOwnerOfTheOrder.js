@@ -3,7 +3,7 @@ const UserRepository = require("../repositories/user/UserRepository");
 const OrderRepository = require("../repositories/order/OrderRepository");
 
 async function ensureThatIsAdminOrTheOwnerOfTheOrder(request, response, next) {
-  const user_id = Number(request.query.user_id);
+  const user_id = request.user.id;
   const { order_id } = request.params;
 
   const userRepository = new UserRepository();

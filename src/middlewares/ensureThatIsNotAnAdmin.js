@@ -2,7 +2,7 @@ const AppError = require("../utils/AppError");
 const UserRepository = require("../repositories/user/UserRepository");
 
 async function ensureThatIsNotAnAdmin(request, response, next) {
-  const user_id = Number(request.query.user_id);
+  const user_id = request.user.id;
 
   const userRepository = new UserRepository();
 

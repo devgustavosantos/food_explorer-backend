@@ -16,7 +16,7 @@ class UsersControllers {
 
   async update(request, response) {
     const { name, email, old_password, new_password } = request.body;
-    const user_id = Number(request.query.user_id);
+    const user_id = request.user.id;
 
     const userRepository = new UserRepository();
     const userUpdateService = new UserUpdateService(userRepository);
