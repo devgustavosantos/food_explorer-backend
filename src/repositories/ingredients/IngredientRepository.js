@@ -24,10 +24,20 @@ class IngredientsRepository {
     return ingredients;
   }
 
+  async findById(id) {
+    const ingredient = await knex("ingredients").where({ id }).first();
+
+    return ingredient;
+  }
+
   async findByName(name) {
     const ingredient = await knex("ingredients").where({ name }).first();
 
     return ingredient;
+  }
+
+  async updateImage({ id, image }) {
+    await knex("ingredients").update({ image }).where({ id });
   }
 }
 

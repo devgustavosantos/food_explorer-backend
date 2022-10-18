@@ -1,5 +1,6 @@
-const MealImageUpdateService = require("../services/meal/MealImageUpdateService");
+const ImageUpdateService = require("../services/image/ImageUpdateService");
 const MealRepository = require("../repositories/meal/MealRepository");
+const uploadConfigs = require("../configs/upload");
 
 class MealImageController {
   async update(request, response) {
@@ -7,11 +8,12 @@ class MealImageController {
     const imageFilename = request.file.filename;
 
     const mealRepository = new MealRepository();
-    const mealImageUpdateService = new MealImageUpdateService(mealRepository);
+    const imageUpdateService = new ImageUpdateService(mealRepository);
 
-    await mealImageUpdateService.execute({
-      meal_id,
+    await imageUpdateService.execute({
+      id: meal_id,
       imageFilename,
+      folder: uploadConfigs.MEALS_FOLDER,
     });
 
     return response.json({});

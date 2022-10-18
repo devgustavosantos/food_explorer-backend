@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const UPLOADS_FOLDER = path.resolve(__dirname, "..", "..", "uploads");
 const TMP_FOLDER = path.resolve(UPLOADS_FOLDER, "tmp");
 const MEALS_FOLDER = path.resolve(UPLOADS_FOLDER, "meals");
+const INGREDIENTS_FOLDER = path.resolve(UPLOADS_FOLDER, "ingredients");
 
 const MULTER = {
   storage: multer.diskStorage({
@@ -21,6 +22,7 @@ const MULTER = {
 module.exports = {
   UPLOADS_FOLDER,
   TMP_FOLDER,
-  MEALS_FOLDER,
   MULTER,
+  MEALS_FOLDER,
+  INGREDIENTS_FOLDER,
 };

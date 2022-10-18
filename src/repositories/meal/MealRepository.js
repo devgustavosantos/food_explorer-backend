@@ -54,15 +54,8 @@ class MealRepository {
     return;
   }
 
-  async updateImage({ meal_id, image, updated_at }) {
-    await knex("meals")
-      .update({
-        image,
-        updated_at,
-      })
-      .where({ id: meal_id });
-
-    return;
+  async updateImage({ id, image }) {
+    await knex("meals").update({ image }).where({ id });
   }
 
   async delete(id) {
