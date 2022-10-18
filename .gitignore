@@ -2,3 +2,7 @@ node_modules
 notes
 .env
 *.db
+uploads/meals/*
+uploads/ingredients/*
+uploads/tmp/*
+

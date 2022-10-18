@@ -3,10 +3,15 @@ require("dotenv/config");
 const express = require("express");
 const routes = require("./routes");
 const AppError = require("./utils/AppError");
+const uploadConfigs = require("./configs/upload");
+const cors = require("cors");
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
+
+app.use("/files/meals", express.static(uploadConfigs.MEALS_FOLDER));
+app.use("/files/ingredients", express.static(uploadConfigs.INGREDIENTS_FOLDER));
 
 app.use(routes);
 
