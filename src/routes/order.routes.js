@@ -14,6 +14,7 @@ routes
     ensureThatIsAdminOrTheOwnerOfTheOrder,
     ordersControllers.show
   )
+  .get("/", ordersControllers.index)
   .put("/", ensureThatIsAdmin, ordersControllers.update);
 
 module.exports = routes;

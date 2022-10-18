@@ -1,14 +1,18 @@
-const MealRepository = require("../repositories/meal/MealRepository");
 const OrderRepository = require("../repositories/order/OrderRepository");
-const OrderMealRepository = require("../repositories/order_meal/OrderMealRepository");
-
 const OrderCreateService = require("../services/order/OrderCreateService");
 const OrderShowService = require("../services/order/OrderShowService");
 const OrderUpdateService = require("../services/order/OrderUpdateService");
 const OrderSearchService = require("../services/order/OrderSearchService");
+const OrderIndexService = require("../services/order/OrderIndexService");
+
+const OrderMealRepository = require("../repositories/order_meal/OrderMealRepository");
 const OrderMealCreateService = require("../services/order_meal/OrderMealCreateService");
 
+const MealRepository = require("../repositories/meal/MealRepository");
 const MealIndexByIdService = require("../services/meal/MealIndexByIdService");
+
+const UserRepository = require("../repositories/user/UserRepository");
+const UserCheckIfIsAdmin = require("../services/user/UserCheckIfIsAdmin");
 
 class OrdersControllers {
   async create(request, response) {
@@ -55,6 +59,22 @@ class OrdersControllers {
     const orderWithMeals = await orderShowService.execute(order_id);
 
     return response.json(orderWithMeals);
+  }
+
+  async index(request, response) {
+    const user_id = Number(request.query.user_id);
+
+    const userRepository = new UserRepository();
+    const userCheckIfIsAdmin = new UserCheckIfIsAdmin(userRepository);
+
+    const accessLevel = await userCheckIfIsAdmin.execute(user_id);
+
+    const orderRepository = new OrderRepository();
+    const orderIndexService = new OrderIndexService(orderRepository);
+
+    const result = await orderIndexService.execute({ user_id, accessLevel });
+
+    return response.json(result);
   }
 
   async update(request, response) {
