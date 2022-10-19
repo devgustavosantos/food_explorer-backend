@@ -41,13 +41,12 @@ class MealRepository {
     return mealInfos;
   }
 
-  async update({ id, title, description, price, updated_at }) {
+  async update({ id, title, description, price }) {
     await knex("meals")
       .update({
         title,
         description,
         price,
-        updated_at,
       })
       .where({ id });
 

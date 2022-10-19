@@ -31,22 +31,12 @@ class MealUpdateService {
       throw new AppError("O preço é inválido.");
     }
 
-    const generateTime = () => {
-      const currentTime = new Date()
-        .toISOString()
-        .replace("Z", "")
-        .replace("T", " ");
-
-      const formattedTime = currentTime.substring(0, currentTime.length - 4);
-
-      return formattedTime;
+    const mealUpdated = {
+      id: meal_id,
+      title,
+      description,
+      price,
     };
-
-    let mealUpdated = mealInfos;
-    mealUpdated.title = title;
-    mealUpdated.description = description;
-    mealUpdated.price = price;
-    mealUpdated.updated_at = generateTime();
 
     await this.mealRepository.update(mealUpdated);
   }
