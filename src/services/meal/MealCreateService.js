@@ -5,8 +5,8 @@ class MealCreateService {
     this.mealRepository = mealRepository;
   }
 
-  async execute({ title, description, price }) {
-    if (!title || !description || !price) {
+  async execute({ title, category, description, price }) {
+    if (!title || !category || !description || !price) {
       throw new AppError(
         "Faltam dados necessário para cadastrar um novo prato."
       );
@@ -26,6 +26,7 @@ class MealCreateService {
 
     const mealId = await this.mealRepository.create({
       title,
+      category,
       description,
       price,
     });

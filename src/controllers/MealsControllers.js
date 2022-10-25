@@ -13,7 +13,7 @@ const MealIngredientUpdateService = require("../services/meal_ingredient/MealIng
 
 class MealsControllers {
   async create(request, response) {
-    const { title, description, price, ingredients } = request.body;
+    const { title, category, description, price, ingredients } = request.body;
 
     const mealRepository = new MealRepository();
     const mealCreateService = new MealCreateService(mealRepository);
@@ -25,6 +25,7 @@ class MealsControllers {
 
     const mealId = await mealCreateService.execute({
       title,
+      category,
       description,
       price,
     });
