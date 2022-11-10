@@ -1,5 +1,5 @@
 const DiskStorage = require("../../providers/DiskStorage");
-const AppError = require("../utils/AppError")
+const AppError = require("../../utils/AppError");
 
 class ImageUpdateService {
   constructor(repository) {
@@ -9,7 +9,7 @@ class ImageUpdateService {
   async execute({ id, imageFilename, folder }) {
     const infos = await this.repository.findById(id);
 
-    if(!infos) {
+    if (!infos) {
       throw new AppError(
         "Não foi possível atualizar esse prato pois ele não está cadastrado"
       );
