@@ -12,7 +12,7 @@ class IngredientsControllers {
 
     await ingredientCreateService.execute({ name });
 
-    return response.json();
+    return response.status(201).json();
   }
 
   async index(request, response) {

@@ -17,7 +17,8 @@ const UserCheckIfIsAdmin = require("../services/user/UserCheckIfIsAdmin");
 class OrdersControllers {
   async create(request, response) {
     const user_id = request.user.id;
-    const { meals_sent } = request.body;
+
+    const { body: meals_sent } = request;
 
     const mealRepository = new MealRepository();
     const orderRepository = new OrderRepository();
@@ -47,7 +48,7 @@ class OrdersControllers {
       meals_sent,
     });
 
-    return response.json();
+    return response.status(201).json();
   }
 
   async show(request, response) {
@@ -88,7 +89,7 @@ class OrdersControllers {
 
     await orderUpdateService.execute({ order_id, status });
 
-    return response.json();
+    return response.status(201).json();
   }
 }
 
