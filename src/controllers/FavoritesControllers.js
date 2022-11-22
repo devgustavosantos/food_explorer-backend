@@ -29,12 +29,12 @@ class FavoritesControllers {
 
   async delete(request, response) {
     const user_id = request.user.id;
-    const { favorite_id } = request.params;
+    const { meal_id } = request.params;
 
     const favoriteRepository = new FavoriteRepository();
     const favoriteDeleteService = new FavoriteDeleteService(favoriteRepository);
 
-    await favoriteDeleteService.execute({ user_id, favorite_id });
+    await favoriteDeleteService.execute({ user_id, meal_id });
 
     return response.json();
   }

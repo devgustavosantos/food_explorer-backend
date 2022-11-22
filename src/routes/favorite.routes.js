@@ -17,7 +17,7 @@ routes
   )
   .get("/", ensureAuthenticated, favoritesControllers.index)
   .delete(
-    "/:favorite_id",
+    "/:meal_id",
     ensureAuthenticated,
     ensureThatIsNotAnAdmin,
     favoritesControllers.delete

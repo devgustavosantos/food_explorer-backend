@@ -5,18 +5,17 @@ class FavoriteDeleteService {
     this.favoriteRepository = favoriteRepository;
   }
 
-  async execute({ user_id, favorite_id }) {
-    const favoriteInfos = await this.favoriteRepository.findById(favorite_id);
+  async execute({ user_id, meal_id }) {
+    const favoriteInfos = await this.favoriteRepository.findByUserAndMeal({
+      user_id,
+      meal_id,
+    });
 
     if (!favoriteInfos) {
       throw new AppError("Favorito não encontrado.");
     }
 
-    if (favoriteInfos.user_id !== user_id) {
-      throw new AppError("Este favorito pertence a outro usuário.");
-    }
-
-    await this.favoriteRepository.delete(favorite_id);
+    await this.favoriteRepository.delete(favoriteInfos.id);
   }
 }
 
