@@ -30,6 +30,7 @@ class SessionCreateService {
     const userWithoutSensitiveInformation = {
       name: user.name,
       email: user.email,
+      isAdm: user.is_admin ? true : false,
     };
 
     return { user: userWithoutSensitiveInformation, token };
