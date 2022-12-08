@@ -11,7 +11,7 @@ class ImageUpdateService {
 
     if (!infos) {
       throw new AppError(
-        "Não foi possível atualizar esse prato pois ele não está cadastrado"
+        "Não foi possível atualizar esse prato/ingrediente pois ele não está cadastrado"
       );
     }
 
@@ -23,7 +23,11 @@ class ImageUpdateService {
 
     const filename = await diskStorage.saveFile(imageFilename, folder);
 
-    await this.repository.updateImage({ id, image: filename });
+    const infosUpdated = { id, image: filename };
+
+    await this.repository.updateImage(infosUpdated);
+
+    return infosUpdated;
   }
 }
 
