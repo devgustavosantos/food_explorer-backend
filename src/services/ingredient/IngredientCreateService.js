@@ -12,7 +12,15 @@ class IngredientCreateService {
       throw new AppError("Este nome de ingrediente já está em uso.");
     }
 
-    await this.ingredientRepository.create({ name });
+    const ingredientId = await this.ingredientRepository.create({ name });
+
+    const ingredientInfos = {
+      id: ingredientId,
+      name,
+      image: null,
+    };
+
+    return ingredientInfos;
   }
 }
 
