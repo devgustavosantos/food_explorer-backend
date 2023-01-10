@@ -32,7 +32,9 @@ class MealsControllers {
 
     await mealIngredientCreateService.execute({ ingredients, mealId });
 
-    return response.status(201).json();
+    return response
+      .status(201)
+      .json({ id: mealId, title, category, description, price, ingredients });
   }
 
   async index(request, response) {
