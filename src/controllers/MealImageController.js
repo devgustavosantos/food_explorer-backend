@@ -16,7 +16,7 @@ class MealImageController {
       folder: uploadConfigs.MEALS_FOLDER,
     });
 
-    return response.json({});
+    return response.json();
   }
 }
 
