@@ -17,6 +17,7 @@ describe("MealCreateService", () => {
     const meal = {
       title: "Macarrão",
       description: "Um prato italiano",
+      category: "Principais",
       price: "32.05",
     };
 
@@ -29,6 +30,7 @@ describe("MealCreateService", () => {
     const meal = {
       title: "Macarrão",
       description: "Um prato italiano",
+      category: "Principais",
       price: "32.05",
     };
 

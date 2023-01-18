@@ -18,10 +18,35 @@ class MealRepository {
     return meals;
   }
 
-  async findBySimilarTitle(title) {
-    const meals = await knex("meals").whereLike("title", `%${title}%`);
+  async findBySearch(search) {
+    const mealsInfos = [
+      "meals.id",
+      "meals.title",
+      "meals.description",
+      "meals.price",
+      "meals.image",
+      "meals.category",
+    ];
 
-    return meals;
+    const searchByMealTitle = await knex("meals")
+      .select(mealsInfos)
+      .whereLike("title", `%${search}%`);
+
+    const searchByIngredients = await knex("meals")
+      .select(mealsInfos)
+      .innerJoin("meals_ingredients", "meals_ingredients.meal_id", "meals.id")
+      .innerJoin(
+        "ingredients",
+        "meals_ingredients.ingredient_id",
+        "ingredients.id"
+      )
+      .whereLike("name", `%${search}%`);
+
+    const searchResultWithoutDuplicateItems = [
+      ...new Set(searchByMealTitle.concat(searchByIngredients)),
+    ];
+
+    return searchResultWithoutDuplicateItems;
   }
 
   async findById(id) {

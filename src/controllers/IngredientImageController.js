@@ -10,13 +10,13 @@ class IngredientImageController {
     const ingredientRepository = new IngredientRepository();
     const imageUpdateService = new ImageUpdateService(ingredientRepository);
 
-    await imageUpdateService.execute({
+    const infosUpdated = await imageUpdateService.execute({
       id: ingredient_id,
       imageFilename,
       folder: uploadConfigs.INGREDIENTS_FOLDER,
     });
 
-    return response.json({});
+    return response.json(infosUpdated);
   }
 }
 
