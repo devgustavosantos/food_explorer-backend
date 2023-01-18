@@ -16,14 +16,13 @@ class MealRepositoryInMemory {
   }
 
   async findById(id) {
-    const mealInfos = this.meals.find(meal => meal.id === id);
+    const mealInfos = this.meals.find((meal) => meal.id === id);
 
     return mealInfos;
   }
 
   async findByTitle(title) {
-    console.log("passou aqui");
-    const mealInfos = this.meals.find(meal => meal.title === title);
+    const mealInfos = this.meals.find((meal) => meal.title === title);
 
     return mealInfos;
   }
